@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les délices de Noona - Commerce de Glaces</title>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 18%),
+                        radial-gradient(circle at bottom right, rgba(137, 106, 255, 0.16), transparent 20%),
+                        linear-gradient(180deg, #1c0f2f 0%, #291a46 40%, #1a0e2b 100%);
+            color: #f4eefc;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle at 15% 18%, rgba(255, 255, 255, 0.12), transparent 10%),
+                              radial-gradient(circle at 75% 12%, rgba(255, 168, 245, 0.14), transparent 14%);
+            pointer-events: none;
+        }
+
+        header {
+            padding: 2rem 1rem 1rem;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: clamp(2rem, 3vw, 3rem);
+            letter-spacing: -0.05em;
+        }
+
+        .tagline {
+            margin: 0.75rem 0 0;
+            color: rgba(244, 238, 252, 0.8);
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: rgba(244, 238, 252, 0.92);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: #ffe4ff;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 3rem;
+        }
+
+        .hero {
+            padding: 3rem 0 2rem;
+        }
+
+        .hero-content {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 28px;
+            padding: 3rem 2.5rem;
+            backdrop-filter: blur(16px);
+        }
+
+        .eyebrow {
+            margin: 0 0 1rem;
+            color: #e0c6fe;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .hero h2 {
+            margin: 0;
+            font-size: clamp(2.5rem, 4vw, 4.5rem);
+            line-height: 1.03;
+            max-width: 720px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            margin: 1.5rem 0 2rem;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            max-width: 680px;
+            color: rgba(244, 238, 252, 0.82);
+        }
+
+        .flavors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .flavor {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 360px;
+        }
+
+        .flavor h3 {
+            margin: 0;
+            font-size: 1.45rem;
+            color: #ffffff;
+        }
+
+        .flavor p {
+            color: rgba(244, 238, 252, 0.8);
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        .flavor img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 22px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.08);
+        }
+
+        button,
+        .button {
+            font: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: none;
+            padding: 0.95rem 1.75rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            text-decoration: none;
+        }
+
+        button:hover,
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-primary,
+        .flavor button {
+            background: linear-gradient(135deg, #d94ef9 0%, #ff69b4 100%);
+            color: white;
+            box-shadow: 0 18px 40px rgba(255, 105, 180, 0.22);
+        }
+
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #f8f0ff;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+
+        .button-secondary:hover {
+            background: rgba(255, 255, 255, 0.16);
+        }
+
+        #cart,
+        #contact {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 28px;
+            padding: 2rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(12px);
+        }
+
+        #cart h2,
+        #contact h2 {
+            margin-top: 0;
+            font-size: 1.85rem;
+            color: #ffffff;
+        }
+
+        #cart p,
+        #contact p {
+            color: rgba(244, 238, 252, 0.84);
+            line-height: 1.75;
+        }
+
+        #cart-items {
+            margin: 1rem 0;
+            padding-left: 1.25rem;
+            color: rgba(244, 238, 252, 0.9);
+        }
+
+        footer {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            color: rgba(244, 238, 252, 0.75);
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                justify-content: flex-start;
+            }
+
+            .hero-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="brand">
+                <h1>Les délices de Noona</h1>
+                <p class="tagline">Glaces artisanales premium, créées pour un plaisir unique.</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Accueil</a></li>
+                    <li><a href="#flavors">Saveurs</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">Glaces artisanales</p>
+                <h2>Une expérience gourmande, aussi belle que délicieuse.</h2>
+                <p>Découvrez nos parfums signature, commandez rapidement via WhatsApp et savourez un moment unique.</p>
+                <a class="button button-primary" href="#contact">Commander maintenant</a>
+            </div>
+        </section>
+        <section id="flavors">
+            <h2>Nos Saveurs</h2>
+            <div class="flavors">
+                <div class="flavor">
+                    <svg viewBox="0 0 400 300" aria-hidden="true" style="width:100%;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.08);">
+                        <rect width="400" height="300" rx="24" fill="#fcd34d" />
+                        <circle cx="200" cy="140" r="90" fill="#fbbf24" />
+                        <path d="M160 80 Q200 20 240 80" fill="#f59e0b" />
+                    </svg>
+                    <h3>Ananas</h3>
+                    <p>Fraîcheur tropicale.</p>
+                    <button onclick="addToCart('Ananas')">Ajouter au panier</button>
+                </div>
+                <div class="flavor">
+                    <svg viewBox="0 0 400 300" aria-hidden="true" style="width:100%;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.08);">
+                        <rect width="400" height="300" rx="24" fill="#fda4af" />
+                        <circle cx="200" cy="160" r="90" fill="#ec4899" />
+                        <path d="M170 120 Q200 70 230 120" fill="#be185d" />
+                    </svg>
+                    <h3>Fraise</h3>
+                    <p>Douceur fruitée.</p>
+                    <button onclick="addToCart('Fraise')">Ajouter au panier</button>
+                </div>
+                <div class="flavor">
+                    <svg viewBox="0 0 400 300" aria-hidden="true" style="width:100%;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.08);">
+                        <rect width="400" height="300" rx="24" fill="#7c2d12" />
+                        <circle cx="200" cy="160" r="90" fill="#a16207" />
+                        <rect x="160" y="90" width="80" height="120" rx="36" fill="#5d4037" />
+                    </svg>
+                    <h3>Chocolat</h3>
+                    <p>Richesse intense.</p>
+                    <button onclick="addToCart('Chocolat')">Ajouter au panier</button>
+                </div>
+                <div class="flavor">
+                    <svg viewBox="0 0 400 300" aria-hidden="true" style="width:100%;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.08);">
+                        <rect width="400" height="300" rx="24" fill="#fef3c7" />
+                        <circle cx="200" cy="160" r="90" fill="#facc15" />
+                        <path d="M170 110 Q200 50 230 110" fill="#f59e0b" />
+                    </svg>
+                    <h3>Vanille</h3>
+                    <p>Classique et crémeuse.</p>
+                    <button onclick="addToCart('Vanille')">Ajouter au panier</button>
+                </div>
+                <div class="flavor">
+                    <svg viewBox="0 0 400 300" aria-hidden="true" style="width:100%;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.08);">
+                        <rect width="400" height="300" rx="24" fill="#f7d6a3" />
+                        <rect x="140" y="100" width="120" height="120" rx="60" fill="#bb7400" />
+                        <path d="M140 120 Q200 60 260 120" fill="#f59e0b" />
+                    </svg>
+                    <h3>Caramel</h3>
+                    <p>Sucré et fondant.</p>
+                    <button onclick="addToCart('Caramel')">Ajouter au panier</button>
+                </div>
+                <div class="flavor">
+                    <svg viewBox="0 0 400 300" aria-hidden="true" style="width:100%;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.08);">
+                        <rect width="400" height="300" rx="24" fill="#4b2e2a" />
+                        <circle cx="200" cy="160" r="90" fill="#6b4a3a" />
+                        <path d="M180 140 Q200 100 220 140" fill="#3f2a21" />
+                    </svg>
+                    <h3>Cacao</h3>
+                    <p>Puissant et amer.</p>
+                    <button onclick="addToCart('Cacao')">Ajouter au panier</button>
+                </div>
+            </div>
+        </section>
+        <section id="cart">
+            <h2>Panier</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: <span id="total">0</span> FCFA</p>
+            <button onclick="clearCart()">Vider le panier</button>
+        </section>
+        <section id="contact">
+            <h2>Contactez-nous</h2>
+            <p>Email: info@glacesdelicieuses.com</p>
+            <p>Téléphone / WhatsApp: 2290144013062</p>
+            <a class="button button-secondary" href="https://wa.me/2290144013062?text=Bonjour, je voudrais commander des glaces." target="_blank">Commander via WhatsApp</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Les délices de Noona. Tous droits réservés.</p>
+    </footer>
+    <script>
+        let cart = [];
+        let total = 0;
+
+        const prices = {
+            'Ananas': 500,
+            'Fraise': 500,
+            'Chocolat': 500,
+            'Vanille': 500,
+            'Caramel': 500,
+            'Cacao': 500
+        };
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            localStorage.removeItem('cart'); // Reset cart due to price changes
+            const savedCart = JSON.parse(localStorage.getItem('cart'));
+            if (savedCart) {
+                cart = savedCart;
+                total = cart.reduce((sum, item) => sum + prices[item], 0);
+                updateCart();
+            }
+        }
+
+        function addToCart(flavor) {
+            cart.push(flavor);
+            total += prices[flavor];
+            saveCart();
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${item} <button onclick="removeItem(${index})">❌</button>`;
+                cartItems.appendChild(li);
+            });
+            document.getElementById('total').textContent = total;
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            total = cart.reduce((sum, item) => sum + prices[item], 0);
+            saveCart();
+            updateCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            total = 0;
+            saveCart();
+            updateCart();
+        }
+
+        loadCart();
+    </script>
+</body>
+</html>
